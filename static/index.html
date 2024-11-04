@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI Resume Screening Tool for efficient resume analysis and evaluation.">
+  <title>AI Resume Screening Tool</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #f3f4f6;
+      color: #333;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.8em;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .nav-links a {
+      color: #fff;
+      margin: 0 15px;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      flex: 1;
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .scan-button-container {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+    }
+
+    .scan-button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      color: #fff;
+      background: linear-gradient(135deg, #4a90e2, #357abd);
+      border: none;
+      border-radius: 30px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.8em;
+    }
+
+    footer a {
+      color: #4a90e2;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .advantages, .reviews {
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin: 20px 0;
+    }
+
+    .advantages h2, .reviews h2 {
+      margin-bottom: 10px;
+      color: #4a90e2;
+    }
+
+    .advantages ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    .advantages li {
+      margin: 5px 0;
+      font-size: 1em;
+      color: #333;
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      height: 500px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      display: none;
+      border-radius: 10px;
+    }
+
+    .slides img.active {
+      display: block; /* Show only the active image */
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      width: 50px;
+      height: 50px;
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      transform: translateY(-50%);
+      border-radius: 50%;
+      z-index: 1; /* Ensure arrows are on top */
+    }
+
+    .arrow.left {
+      left: 10px;
+    }
+
+    .arrow.right {
+      right: 10px;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 5px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: #4a90e2;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      header {
+        font-size: 1.5em;
+      }
+
+      .scan-button {
+        padding: 10px 20px;
+        font-size: 1em;
+      }
+
+      .slider {
+        height: 200px; /* Adjust height for smaller screens */
+      }
+      
+      .advantages, .reviews {
+        margin-left: 10px;
+        margin-right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>AI Resume Screening Tool</h1>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <!-- <a href="/add_resume">Add Resume</a> -->
+    <a href="/about">About Us</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/features">Features</a>
+    <a href="/contact">Contact Us</a>
+  </div>
+</header>
+
+<div id="home-content">
+  <div class="slider">
+    <div class="slides">
+      <img src="static/images/66ce64f79366b4.57108373.jpg" class="active" alt="Image 1">
+      <img src="static/images/AI prompt.jpg" alt="Image 2">
+      <img src="static/images/file-upload-site-3.jpg" alt="Image 3">
+      <img src="static/images/employer-reading-resume.jpg" alt="Image 4">
+    </div>
+  
+    <button class="arrow left" onclick="moveSlide(-1)" aria-label="Previous Slide">&#10094;</button>
+    <button class="arrow right" onclick="moveSlide(1)" aria-label="Next Slide">&#10095;</button>
+  </div>
+  
+  <div class="dots">
+    <span class="dot" onclick="currentSlide(1)" aria-label="Slide 1"></span>
+    <span class="dot" onclick="currentSlide(2)" aria-label="Slide 2"></span>
+    <span class="dot" onclick="currentSlide(3)" aria-label="Slide 3"></span>
+    <span class="dot" onclick="currentSlide(4)" aria-label="Slide 4"></span>
+  </div>
+
+  <div class="scan-button-container">
+    <a href="/add_resume" class="scan-button" aria-label="Scan Resume">
+      <p>Click Here to Scan Resume</p>
+    </a>
+  </div>
+
+  <div class="advantages">
+    <h2>Advantages of Our AI Resume Screening Tool:</h2>
+    <ul>
+      <li><strong>Efficiency:</strong> Rapidly analyze and evaluate resumes, saving valuable time.</li>
+      <li><strong>Accuracy:</strong> Utilize advanced algorithms to improve screening precision.</li>
+      <li><strong>Insights:</strong> Gain actionable insights from your resume data.</li>
+      <li><strong>Customizable:</strong> Tailor your screening criteria to fit your specific needs.</li>
+      <li><strong>User-Friendly:</strong> Easy-to-use interface designed for all skill levels.</li>
+    </ul>
+  </div>
+
+  <div class="reviews">
+    <h2>What Our Users Say:</h2>
+    <p>"The AI Resume Screening Tool has revolutionized our hiring process!" - <em>Jane Doe, HR Manager</em></p>
+    <p>"An essential tool for anyone involved in recruitment." - <em>John Smith, Hiring Director</em></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 AI Resume Screening Tool. All rights reserved. | <a href="static/privacy.html">Privacy Policy</a></p>
+</footer>
+
+<script>
+  let slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    let slides = document.getElementsByClassName("slides")[0].children;
+    let dots = document.getElementsByClassName("dot");
+    
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove('active');
+      dots[i].classList.remove('active');
+    }
+    
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    if (slideIndex < 1) { slideIndex = slides.length }
+    
+    slides[slideIndex - 1].classList.add('active');
+    dots[slideIndex - 1].classList.add('active');
+
+    setTimeout(showSlides, 3000); // Change image every 3 seconds
+  }
+
+  function moveSlide(n) {
+    slideIndex += n;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    if (slideIndex < 1) { slideIndex = slides.length }
+    updateSlides();
+  }
+
+  function currentSlide(n) {
+    slideIndex = n;
+    updateSlides();
+  }
+
+  function updateSlides() {
+    let slides = document.getElementsByClassName("slides")[0].children;
+    let dots = document.getElementsByClassName("dot");
+    
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove('active');
+      dots[i].classList.remove('active');
+    }
+    
+    slides[slideIndex - 1].classList.add('active');
+    dots[slideIndex - 1].classList.add('active');
+  }
+</script>
+</body>
+</html>
